@@ -8,7 +8,7 @@
 		API_MIN_VERSION=3.14.4.0
 		APP_VERSION=3.8.20.0
 		OLD_VERSION=3.8.19.0
-		SVN_REVISION=1808
+		SVN_REVISION=1808 => ${SVN_REVISION} from jenkins
 		SVN_REVISION_PREV=1807
 		SVN_HOST=svn_dtagscrum@87.234.206.162/var/lib/subversion # not used in ant build script
 		SVN_PROTO=svn+ssh # not used in ant build script
@@ -16,16 +16,36 @@
 
 	<taskdef resource="net/sf/antcontrib/antcontrib.properties">
 		<classpath>
-			<pathelement location="/data/app/coin/workspace/Scripts/ant-contrib-1.0b.jar"/>
+			<pathelement location="${basedir}/../Scripts/ant-contrib-1.0b.jar"/>
 		</classpath>
 	</taskdef>
-
-	<property name="API_VERSION" value="3.14.23" description="cmp api version"/>
-	<property name="API_MIN_VERSION" value="3.14.23" description="cmp api min version"/>
-	<property name="APP_VERSION" value="3.8.20.0" description="alps (=app) version"/>
-	<property name="OLD_VERSION" value="3.8.19.0" description="old alps version"/>
-	<property name="SVN_REVISION" value="1808" description="svn actual revision"/>
-	<property name="SVN_REVISION_PREV" value="1807" description="svn previous revision"/>
+	
+	<propertyregex 
+		property="ALPS_VERSION_X" 
+		input="${TAGNEW}" 
+		regexp="(V)(\d{1,2})-(\d{1,2})-(\d{1,2})-(\d{1,2})" 
+		replace="\2.\3.\4.\5" 
+		defaultValue="3.x.y.z" 
+		global="true" 
+		casesensitive="false"
+	/>
+	
+	<propertyregex 
+		property="ALPS_VERSION_Y" 
+		input="${TAGOLD}" 
+		regexp="(V)(\d{1,2})-(\d{1,2})-(\d{1,2})-(\d{1,2})" 
+		replace="\2.\3.\4.\5" 
+		defaultValue="3.x.y.z" 
+		global="true" 
+		casesensitive="false"
+	/>
+	
+	<property name="API_VERSION" value="3.x.y.z" description="cmp api version"/>
+	<property name="API_MIN_VERSION" value="3.x.y.z" description="cmp api min version"/>
+	<property name="APP_VERSION" value="${ALPS_VERSION_X}" description="alps (app) version"/>
+	<property name="OLD_VERSION" value="${ALPS_VERSION_Y}" description="old alps version"/>
+	<property name="SVN_REVISION" value="0" description="svn actual revision"/>
+	<property name="SVN_REVISION_PREV" value="0" description="svn previous revision"/>
 
 	<propertyregex property="CVS_APP_VERSION" input="V${APP_VERSION}" regexp="\." replace="-" global="true" casesensitive="false"/>
 	<propertyregex property="CVS_API_VERSION" input="V${API_VERSION}" regexp="\." replace="-" global="true" casesensitive="false"/>
@@ -61,7 +81,7 @@
 	<property name="SVN_EXPORT_REVISION" value="HEAD" description=""/>
 
 	<target name="checkarguments" description="Sanitycheck (not implemented yet)">
-		<echo>Usage: make/ant API_VERSION=version API_MIN_VERSION=version APP_VERSION=version OLD_VERSION=version SVN_REVISION=revision SVN_REVISION_PREV=revision</echo>
+		<echo>Usage: ant API_VERSION=${API_VERSION} API_MIN_VERSION=${API_MIN_VERSION} APP_VERSION=${APP_VERSION} OLD_VERSION=${OLD_VERSION} SVN_REVISION=${SVN_REVISION} SVN_REVISION_PREV=${SVN_REVISION_PREV}</echo>
 	</target>
 
 	<target name="cleanupbeforebuild" depends="checkarguments" description="Cleanup build directory">
@@ -223,7 +243,7 @@
 	<target name="cleanafterbuild" depends="rpm_build" description="Cleaning up after build">
 		<echo message="Cleanup the build"/>
 		<delete dir="${PACKAGE_ROOT}" includeemptydirs="true"/>
-		<!-- delete file="${PACKAGE_TAR}"/ -->
+		<delete file="${PACKAGE_TAR}"/>
 	</target>
 
 </project>
