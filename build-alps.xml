@@ -257,7 +257,11 @@
 		<move file="/usr/src/packages/RPMS/${PACKAGE_ARCH}/${PACKAGE_NAME}-${PACKAGE_VERSION}-${PACKAGE_RELEASE}.${PACKAGE_ARCH}.rpm" todir="${basedir}" failonerror="true"/>
 	</target>
 
-	<target name="cleanafterbuild" depends="rpm_build" description="Cleaning up after build">
+	<target name="evaluateChecksums">
+		<checksum file="${basedir}/${PACKAGE_NAME}-${PACKAGE_VERSION}-${PACKAGE_RELEASE}.${PACKAGE_ARCH}.rpm" algorithm="MD5" fileext="md5" forceoverwrite="yes"/>
+	</target>
+
+	<target name="cleanafterbuild" depends="rpm_build,evaluateChecksums" description="Cleaning up after build">
 		<echo message="Cleanup the build"/>
 		<delete dir="${PACKAGE_ROOT}" includeemptydirs="true"/>
 		<delete file="${PACKAGE_TAR}"/>
