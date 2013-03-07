@@ -5,7 +5,7 @@
 	<!--
 		Project Parameters (examples):
 		API_VERSION=3.14.4.0
-		OLD_VERSION=3.14.3.0
+		API_PREV_VERSION=3.14.3.0
 		SVN_REVISION=6107
 		SVN_REVISION_PREV=6099
 		SVN_HOST=svn_dtagscrum@87.234.206.162/var/lib/subversion # not used in ant build script
@@ -16,12 +16,12 @@
     
     <taskdef resource="net/sf/antcontrib/antcontrib.properties">
 		<classpath>
-			<pathelement location="${basedir}/../Scripts/ant-contrib-1.0b.jar"/>
+			<pathelement location="${basedir}/../Scripts/ant-contrib-1.0b3.jar"/>
 		</classpath>
 	</taskdef>
 
     <propertyregex
-        property="ALPS_VERSION_X"
+        property="API_VERSION"
         input="${TAGNEW}"
         regexp="(V)(\d{1,2})-(\d{1,2})-(\d{1,2})-(\d{1,2})"
         replace="\2.\3.\4.\5"
@@ -31,7 +31,7 @@
     />
 
     <propertyregex
-        property="ALPS_VERSION_Y"
+        property="API_PREV_VERSION"
         input="${TAGOLD}"
         regexp="(V)(\d{1,2})-(\d{1,2})-(\d{1,2})-(\d{1,2})"
         replace="\2.\3.\4.\5"
@@ -40,23 +40,19 @@
         casesensitive="false"
     /> 
 
-    <property name="API_VERSION" value="3.x.y" description="cmp api version"/>
-    <property name="API_MIN_VERSION" value="3.x.y" description="cmp api min version"/>
-    <property name="APP_VERSION" value="${ALPS_VERSION_X}" description="alps (app) version"/>
-    <property name="OLD_VERSION" value="${ALPS_VERSION_Y}" description="old alps version"/>
     <property name="SVN_REVISION" value="0" description="svn actual revision"/>
     <property name="SVN_REVISION_PREV" value="0" description="svn previous revision"/>
     
-	<propertyregex property="CVS_APP_VERSION" input="V${APP_VERSION}" regexp="\." replace="-" global="true" casesensitive="false"/>
+	<propertyregex property="CVS_APP_VERSION" input="V${API_VERSION}" regexp="\." replace="-" global="true" casesensitive="false"/>
 	<propertyregex property="CVS_API_VERSION" input="V${API_VERSION}" regexp="\." replace="-" global="true" casesensitive="false"/>
-	<propertyregex property="CVS_OLD_VERSION" input="V${OLD_VERSION}" regexp="\." replace="-" global="true" casesensitive="false"/>
+	<propertyregex property="CVS_OLD_VERSION" input="V${API_PREV_VERSION}" regexp="\." replace="-" global="true" casesensitive="false"/>
 
 	<property name="CVS_PACKAGE" value="TOI_CMP" description="cvs package if needed for cvs build"/>
 	<property name="CVS_ROOT" value="CVS" description="cvs repository uri if needed for cvs build"/>
 
 	<property name="APP_RELEASE" value="0" description=""/>
 
-	<property name="PACKAGE_VERSION" value="${APP_VERSION}.${SVN_REVISION}" description=""/>
+	<property name="PACKAGE_VERSION" value="${API_VERSION}.${SVN_REVISION}" description=""/>
 	<property name="PACKAGE_REQUIRES" value="toi-cmp-base-php5 >= 5.3.7, funphp5-tdb-cmp >= 5.3.7, e2fsprogs, dtag-cmp-g10runner"/>
 	<property name="PACKAGE_NAME" value="toi-cmp-api" description=""/>
 	<property name="PACKAGE_ROOT" value="${PACKAGE_NAME}-${PACKAGE_VERSION}" description=""/>
@@ -78,22 +74,19 @@
 	<property name="SVN_EXPORT_REVISION" value="HEAD" description=""/>
 
 	<target name="checkarguments" description="Sanitycheck (not implemented yet)">
-        <echo>Usage: ant API_VERSION=${API_VERSION} OLD_VERSION=${OLD_VERSION} SVN_REVISION=${SVN_REVISION} SVN_REVISION_PREV=${SVN_REVISION_PREV}</echo>
+        <echo>Usage: ant API_VERSION=${API_VERSION} API_PREV_VERSION=${API_PREV_VERSION} SVN_REVISION=${SVN_REVISION} SVN_REVISION_PREV=${SVN_REVISION_PREV}</echo>
 	</target>
 
     <target name="writeProperties">
         <echo file="${basedir}/cmp.properties" message="# Generated on build ${env.BUILD_NUMBER} for ${env.BUILD_TAG}${line.separator}"/>
         <echo file="${basedir}/cmp.properties" append="true" message="API_VERSION=${API_VERSION}${line.separator}"/>
-        <echo file="${basedir}/cmp.properties" append="true" message="API_MIN_VERSION=${API_MIN_VERSION}${line.separator}"/>
-        <echo file="${basedir}/cmp.properties" append="true" message="API_MIN_VERSION=${API_MIN_VERSION}${line.separator}"/>
-        <echo file="${basedir}/cmp.properties" append="true" message="APP_VERSION=${APP_VERSION}${line.separator}"/>
-        <echo file="${basedir}/cmp.properties" append="true" message="OLD_VERSION=${OLD_VERSION}${line.separator}"/>
+        <echo file="${basedir}/cmp.properties" append="true" message="API_PREV_VERSION=${API_PREV_VERSION}${line.separator}"/>
         <echo file="${basedir}/cmp.properties" append="true" message="SVN_REVISION=${SVN_REVISION}${line.separator}"/>
         <echo file="${basedir}/cmp.properties" append="true" message="SVN_REVISION_PREV=${SVN_REVISION_PREV}${line.separator}"/>
-        <echo file="${basedir}/cmp.properties" append="true" message="PACKAGE_VERSION=${APP_VERSION}.${SVN_REVISION}${line.separator}"/>
+        <echo file="${basedir}/cmp.properties" append="true" message="PACKAGE_VERSION=${API_VERSION}.${SVN_REVISION}${line.separator}"/>
         <echo file="${basedir}/cmp.properties" append="true" message="PACKAGE_NAME=${PACKAGE_NAME}${line.separator}"/>
         <echo file="${basedir}/cmp.properties" append="true" message="PACKAGE_ARCH=${PACKAGE_ARCH}${line.separator}"/>
-                <echo file="${basedir}/cmp.properties" append="true" message="PACKAGE_TAR=${PACKAGE_TAR}${line.separator}"/>
+		<echo file="${basedir}/cmp.properties" append="true" message="PACKAGE_TAR=${PACKAGE_TAR}${line.separator}"/>
     </target>   
     
 	<target name="cleanupbeforebuild" depends="checkarguments,writeProperties" description="Cleanup build directory">
@@ -245,15 +238,14 @@
 		<move file="/usr/src/packages/RPMS/${PACKAGE_ARCH}/${PACKAGE_NAME}-${PACKAGE_VERSION}-${PACKAGE_RELEASE}.${PACKAGE_ARCH}.rpm" todir="${basedir}" failonerror="true"/>
 	</target>
 
-	<target name="checksums">
-		<checksum file="${basedir}/${PACKAGE_NAME}-${PACKAGE_VERSION}-${PACKAGE_RELEASE}.${PACKAGE_ARCH}.rpm" algorithm="MD5" fileext="md5" forceoverwrite="yes"/>
+	<target name="create_checksum">
+		<checksum file="${basedir}/${PACKAGE_NAME}-${PACKAGE_VERSION}-${PACKAGE_RELEASE}.${PACKAGE_ARCH}.rpm" algorithm="MD5" forceoverwrite="yes"/>
 	</target>
 
-	<target name="cleanafterbuild" depends="rpm_build,checksums" description="Cleaning up after build">
+	<target name="cleanafterbuild" depends="rpm_build,create_checksum" description="Cleaning up after build">
 		<echo message="Cleanup the build"/>
 		<delete dir="${PACKAGE_ROOT}" includeemptydirs="true"/>
 		<delete file="${PACKAGE_TAR}"/>
 	</target>
 
 </project>
-
