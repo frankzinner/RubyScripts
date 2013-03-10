@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="BuildPipeline - Committ Stage" basedir="." defaulttarget="Compile">
+
+	<!-- Checkout will be done by CI-Server -->
+
+	<!-- Configuration Section -->
+	<property name="buildversion" value="${build}"/>
+
+	<!-- Task Sections Committ Stage -->
+	<task name="Init">
+		<echo message="Initializing" />
+	</task>
+	<task name="Compile">
+		<echo message="Compile" />
+	</task>
+
+	<task name="xUnitTests">
+		<echo message="xUnit testing" />
+	</task>
+
+	<task name="Analysis">
+		<echo message="Analysis" />
+	</task>
+
+	<task name="Packaging">
+		<echo message="Packaging" />
+	</task>
+
+</project>
