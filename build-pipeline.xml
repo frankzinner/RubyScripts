@@ -8,8 +8,7 @@
 	<property environment="env" />
 	<property name="buildversion" value="1.0.0.0-snapshot" />
 
-	<!-- Task Sections Committ Stage -->
-
+	<!-- Task Sections Commit Stage -->
 	<target name="Init">
 		<echo message="Initializing" />
 	</target>
@@ -28,6 +27,23 @@
 
 	<target name="Packaging" depends="Analysis">
 		<echo message="Packaging" />
+	</target>
+
+	<!-- Task Section Acceptance Stage -->
+	<target name="Configure-Environment" depends="">
+		<echo message="Configure environmen"/>
+	</target>
+
+	<target name="Deploy-Binaries" depends="Configure-Environment">
+		<echo message="Deploy Binaries" />
+	</target>
+
+	<target name="Smoke-Tests" depends="Deploy-Binaries">
+		<echo message="Smoke tests" />
+	</target>
+
+	<target name="Acceptance-Tests" depends="Smoke-Tests">
+		<echo message="Acceptance testing" />
 	</target>
 
 </project>
