@@ -7,10 +7,27 @@
 	<!-- Configuration Section -->
 	<property environment="env" />
 	<property name="buildversion" value="1.0.0.0-snapshot" />
+	<property name="dir.build" value="" />
+	<property name="dir.scr" value="" />
+	<property name="dir.libs" value="" />
+
+	<property file="project.properties" />
+
+	<!-- Path definitions -->
+	<path id="classpath.common" description="Classpath definition">
+		<pathelement location="${basedir}" />
+	</path>
+
+	<target name="Build-Commit" depends="Init, Commit-Clean, Compile, xUnitTests, Analysis, Packaging" />
 
 	<!-- Task Sections Commit Stage -->
+
 	<target name="Init">
 		<echo message="Initializing" />
+	</target>
+
+	<target name="Commit-Clean" description="Destroy and clean all genereated files and directories">
+		<echo message="Cleaning" />
 	</target>
 
 	<target name="Compile" depends="Init">
@@ -27,11 +44,22 @@
 
 	<target name="Packaging" depends="Analysis">
 		<echo message="Packaging" />
+		<zipfileset dir="" prefix="">
+			<include name="" />
+			<exclude name="" />
+		</zipfileset>
 	</target>
 
 	<!-- Task Section Acceptance Stage -->
+
+	<target name="Build-Acceptance" depends="Configure-Environment, Acceptance-Clean, Deploy-Binaries, Smoke-Tests, Acceptance-Tests" />
+
 	<target name="Configure-Environment" depends="">
-		<echo message="Configure environmen"/>
+		<echo message="Configure environment"/>
+	</target>
+
+	<target name="Acceptance-Clean" description="Destroy and clean all genereated files and directories">
+		<echo message="Cleaning acceptance stage" />
 	</target>
 
 	<target name="Deploy-Binaries" depends="Configure-Environment">
