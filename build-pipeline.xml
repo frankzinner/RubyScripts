@@ -1,77 +1,83 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<project name="BuildPipeline-CommitStage" basedir="." default="Packaging">
+<project
+	name="BuildPipeline-CommitStage"
+	basedir="."
+	default="Packaging"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:ivy="antlib:org.apache.ivy.ant"
+	xsi:noNamespaceSchemaLocation="http://ant.apache.org/ivy/schemas/ivy.xsd">
 
 	<!-- Checkout will be done by CI-Server -->
 
 	<!-- Configuration Section -->
-	<property environment="env" />
-	<property name="buildversion" value="1.0.0.0-snapshot" />
-	<property name="dir.build" value="" />
-	<property name="dir.scr" value="" />
-	<property name="dir.libs" value="" />
+	<property environment="env"/>
+	<property name="buildversion" value="1.0.0.0-snapshot"/>
+	<property name="dir.build" value=""/>
+	<property name="dir.scr" value=""/>
+	<property name="dir.libs" value=""/>
 
-	<property file="project.properties" />
+	<property file="project.properties"/>
 
 	<!-- Path definitions -->
 	<path id="classpath.common" description="Classpath definition">
-		<pathelement location="${basedir}" />
+		<pathelement location="${basedir}"/>
 	</path>
 
-	<target name="Build-Commit" depends="Init, Commit-Clean, Compile, xUnitTests, Analysis, Packaging" />
+	<target name="Build-Commit" depends="Init, Commit-Clean, Compile, xUnitTests, Analysis, Packaging"/>
 
 	<!-- Task Sections Commit Stage -->
 
 	<target name="Init">
-		<echo message="Initializing" />
+		<echo message="Initializing"/>
 	</target>
 
 	<target name="Commit-Clean" description="Destroy and clean all genereated files and directories">
-		<echo message="Cleaning" />
+		<echo message="Cleaning"/>
 	</target>
 
 	<target name="Compile" depends="">
-		<echo message="Compile" />
+		<echo message="Compile"/>
 	</target>
 
 	<target name="xUnitTests" depends="">
-		<echo message="xUnit testing" />
+		<echo message="xUnit testing"/>
 	</target>
 
 	<target name="Analysis" depends="">
-		<echo message="Analysis" />
+		<echo message="Analysis"/>
 	</target>
 
 	<target name="Packaging" depends="">
-		<echo message="Packaging" />
+		<echo message="Packaging"/>
 		<zipfileset dir="" prefix="">
-			<include name="" />
-			<exclude name="" />
+			<include name=""/>
+			<exclude name=""/>
 		</zipfileset>
 	</target>
 
 	<!-- Task Section Acceptance Stage -->
 
-	<target name="Build-Acceptance" depends="Configure-Environment, Acceptance-Clean, Deploy-Binaries, Smoke-Tests, Acceptance-Tests" />
+	<target name="Build-Acceptance" depends="Configure-Environment, Acceptance-Clean, Deploy-Binaries, Smoke-Tests, Acceptance-Tests"/>
 
 	<target name="Configure-Environment" depends="">
 		<echo message="Configure environment"/>
 	</target>
 
 	<target name="Acceptance-Clean" description="Destroy and clean all genereated files and directories">
-		<echo message="Cleaning acceptance stage" />
+		<echo message="Cleaning acceptance stage"/>
 	</target>
 
 	<target name="Deploy-Binaries" depends="">
-		<echo message="Deploy Binaries" />
+		<echo message="Deploy Binaries"/>
 	</target>
 
 	<target name="Smoke-Tests" depends="">
-		<echo message="Smoke tests" />
+		<echo message="Smoke tests"/>
 	</target>
 
 	<target name="Acceptance-Tests" depends="">
-		<echo message="Acceptance testing" />
+		<echo message="Acceptance testing"/>
 	</target>
 
 </project>
