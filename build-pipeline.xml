@@ -3,7 +3,7 @@
 <project
 	name="BuildPipeline-CommitStage"
 	basedir="."
-	default="Packaging"
+	default="Build-Commit"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:ivy="antlib:org.apache.ivy.ant"
 	xsi:noNamespaceSchemaLocation="http://ant.apache.org/ivy/schemas/ivy.xsd">
