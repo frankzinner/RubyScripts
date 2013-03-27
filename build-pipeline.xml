@@ -30,19 +30,19 @@
 		<echo message="Cleaning" />
 	</target>
 
-	<target name="Compile" depends="Init">
+	<target name="Compile" depends="">
 		<echo message="Compile" />
 	</target>
 
-	<target name="xUnitTests" depends="Compile">
+	<target name="xUnitTests" depends="">
 		<echo message="xUnit testing" />
 	</target>
 
-	<target name="Analysis" depends="xUnitTests">
+	<target name="Analysis" depends="">
 		<echo message="Analysis" />
 	</target>
 
-	<target name="Packaging" depends="Analysis">
+	<target name="Packaging" depends="">
 		<echo message="Packaging" />
 		<zipfileset dir="" prefix="">
 			<include name="" />
@@ -62,15 +62,15 @@
 		<echo message="Cleaning acceptance stage" />
 	</target>
 
-	<target name="Deploy-Binaries" depends="Configure-Environment">
+	<target name="Deploy-Binaries" depends="">
 		<echo message="Deploy Binaries" />
 	</target>
 
-	<target name="Smoke-Tests" depends="Deploy-Binaries">
+	<target name="Smoke-Tests" depends="">
 		<echo message="Smoke tests" />
 	</target>
 
-	<target name="Acceptance-Tests" depends="Smoke-Tests">
+	<target name="Acceptance-Tests" depends="">
 		<echo message="Acceptance testing" />
 	</target>
 
