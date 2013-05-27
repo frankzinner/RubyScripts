@@ -1,0 +1,100 @@
+Tagging: 
+tag from alps trunk for LISA Version 0.9.7.0
+tag from cmp trunk for LISA Version 0.9.7.0
+
+tag from tag (not trunk!) LISA (HEAD=last version) [copy to new version] and merge upcomming features in tags
+
+CMP: (NEU) V3.14.4.0 / 6107 | (ALT) V3.14.3.0 / 6099
+make API_VERSION=3.14.4.0 OLD_VERSION=3.14.3.0 SVN_REVISION=6107 SVN_REVISION_PREV=6099 SVN_HOST=svn_dtagscrum@87.234.206.162/var/lib/subversion SVN_PROTO=svn+ssh
+MD5: 
+
+Dependencies:
+funphp5-tdb-cmp >= 5.3.7 is needed by toi-cmp-api-3.13.15.0.5990-0.noarch
+dtag-cmp-g10runner is needed by toi-cmp-api-3.13.15.0.5990-0.noarch
+
+
+ALPS: (NEU) V3.8.20.0 / 1808 (ALT) V3.8.19.0 / 1807
+make API_VERSION=3.14.4.0 API_MIN_VERSION=3.14.4.0 APP_VERSION=3.8.20.0 OLD_VERSION=3.8.19.0 SVN_REVISION=1808 SVN_REVISION_PREV=1807 SVN_HOST=svn_dtagscrum@87.234.206.162/var/lib/subversion SVN_PROTO=svn+ssh
+MD5: 
+
+LISA: (NEU) V0.9.7.0 / 5803 (ALT) V0.9.6.0 / 5143
+
+Building:
+
+ant -DSVN_REVISION=5012 -DAPP_VERSION=0.9.7.0 -DLISA_CONF_VERSION=0.9.7.0.5803 -DLISA_APP_BASE_VERSION=0.9.7.0.5803 -DAPI_VERSION=3.13.21.0 -DALPS_VERSION=3.8.17.0 -buildfile build-lisa-conf.xml
+ant -DSVN_REVISION=5012 -DAPP_VERSION=0.9.7.0 -DLISA_CONF_VERSION=0.9.7.0.5803 -DLISA_APP_BASE_VERSION=0.9.7.0.5803 -DAPI_VERSION=3.13.21.0 -DALPS_VERSION=3.8.17.0 -buildfile build-lisa-app-base.xml
+ant -DSVN_REVISION=5012 -DAPP_VERSION=0.9.7.0 -DLISA_CONF_VERSION=0.9.7.0.5803 -DLISA_APP_BASE_VERSION=0.9.7.0.5803 -DAPI_VERSION=3.13.21.0 -DALPS_VERSION=3.8.17.0 -buildfile build-lisa-dispatcher.xml
+ant -DSVN_REVISION=5012 -DAPP_VERSION=0.9.7.0 -DLISA_CONF_VERSION=0.9.7.0.5803 -DLISA_APP_BASE_VERSION=0.9.7.0.5803 -DAPI_VERSION=3.13.21.0 -DALPS_VERSION=3.8.17.0 -buildfile build-lisa-app-inbox.xml
+ant -DSVN_REVISION=5012 -DAPP_VERSION=0.9.7.0 -DLISA_CONF_VERSION=0.9.7.0.5803 -DLISA_APP_BASE_VERSION=0.9.7.0.5803 -DAPI_VERSION=3.13.21.0 -DALPS_VERSION=3.8.17.0 -buildfile build-lisa-app-addressbook.xml
+ant -DSVN_REVISION=5012 -DAPP_VERSION=0.9.7.0 -DLISA_CONF_VERSION=0.9.7.0.5803 -DLISA_APP_BASE_VERSION=0.9.7.0.5803 -DAPI_VERSION=3.13.21.0 -DALPS_VERSION=3.8.17.0 -buildfile build-lisa-app-calendar.xml
+ant -DSVN_REVISION=5012 -DAPP_VERSION=0.9.7.0 -DLISA_CONF_VERSION=0.9.7.0.5803 -DLISA_APP_BASE_VERSION=0.9.7.0.5803 -DAPI_VERSION=3.13.21.0 -DALPS_VERSION=3.8.17.0 -buildfile build-lisa-app-external.xml
+
+
+SVNCHANGELOG:
+
+svn log --xml --verbose -r 2041:2011 svn+ssh://svn_dtagscrum@87.234.206.162/var/lib/subversion/TOI_LISA_X/trunk/LISA-APPS/lisa-res/current
+
+##########################################################################
+Softwareupload: https://swupload.telekom.de/
+Suse SLES 11 (64Bit) (SuSE/Linux SLES 11 (x86_64))
+
+LISA V0.9.7.0 / CMP-API & ALPS
+
+Sammellieferungs-Version: LISA-0.9.7.0-SLES11
+Sammellieferungs-Version: LISA-0.9.7.0-SLES10
+Sammellieferungs-Beschreibung: Sammelanlieferung für Webmail-Client LISA-V0.9.7.0 für TVIL0
+
+Sammelanlieferungs# wird automatisch erteilt: xxxx
+
+
+CMP API in Version 3.14.4 fuer LISA Version 0.9.7.0
+ALPS in Version 3.8.20 fuer LISA Version 0.9.7.0
+
+LISA-DISPATCHER in Version 0.9.7.0 fuer LISA Version 0.9.7.0
+LISA-CONF in Version 0.9.7.0 fuer LISA Version 0.9.7.0
+LISA-PREFS-APP in Version 0.9.7.0 fuer LISA Version 0.9.7.0		
+LISA-INBOX-APP in Version 0.9.7.0 fuer LISA Version 0.9.7.0
+LISA-EXTERNAL-APP in Version 0.9.7.0 fuer LISA Version 0.9.7.0
+LISA-CALENDAR-APP in Version 0.9.7.0 fuer LISA Version 0.9.7.0
+LISA-BASE in Version 0.9.7.0 fuer LISA Version 0.9.7.0
+LISA-ADDRESSBOOK-APP in Version 0.9.7.0 fuer LISA Version 0.9.7.0
+
+Team-SCRUM-Email-Dev@telekom.de
+
+##########################################################################
+Wiki Update:
+
+http://toi.nidag.de/CMP/Wiki/doku.php?id=releasemanagement:lisa
+
+http://toi.nidag.de/CMP/Wiki/doku.php?id=lisadokumentation:startseite
+
+###########################################################################
+Mail an's Team: 
+
+AN: Fendt, Hermann; CommTech-DevOps; Hollitzer, Stefan
+CC: Hausdorff, Michael; alexander.born@nidag.com; Team-SCRUM-E-Mail1; Team-SCRUM-E-Mail-AB-Kal
+
+Betreff: Anlieferung - LISA V0.9.7.0 Pakete für TVIL0
+
+
+Hallo zusammen,
+ 
+hier die benötigten Informationen für das Ticket und die Installation der LISA Pakete in der Version 0.9.7.0
+
+Folgende Pakete wurden soeben für die Installation über SWUpload bereitgestellt:
+LISA - INBOX - dtag-lisa-app-inbox-0.9.7.0.5803-0.noarch.rpm
+LISA - AB - dtag-lisa-app-ab-0.9.7.0.5803-0.noarch.rpm
+LISA - CAL - dtag-lisa-app-cal-0.9.7.0.5803-0.noarch.rpm
+LISA - BASE - dtag-lisa-app-base-0.9.7.0.5803-0.noarch.rpm
+LISA - CONF - dtag-lisa-conf-0.9.7.0.5803-0.noarch.rpm
+LISA - DISPATCHER - dtag-lisa-dispatcher-0.9.7.0.5803-0.noarch.rpm
+LISA - EXT - dtag-lisa-external-0.9.7.0.5803-0.noarch.rpm
+LISA - PREFS - dtag-lisa-prefs-0.9.7.0.5803-0.noarch.rpm
+
+Installation unter Verwendung der älteren Pakete:
+ ALPS - toi-cmp-alps-3.8.19.0.1807-0.noarch.rpm
+CMP - toi-cmp-api-3.14.3.0.6099-0.noarch.rpm
+
+ 
+Viele Grüße aus Darmstadt
+Frank Zinner
