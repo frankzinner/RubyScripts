@@ -1,6 +1,6 @@
 =begin
- Description:	This is a Rake helper file to create some directories if they dont  exists.
- Author: 		Frank Zinner
+ Description:	This is a Rake helper file to create some directories if they dont exists.
+ Author: 	Frank Zinner
 =end
 $RAKEFILEPATH = File.dirname(__FILE__)
 
